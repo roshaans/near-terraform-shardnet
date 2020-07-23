@@ -1,3 +1,3 @@
 output instances {
-  value = aws_instance.celo_proxy
+  value = aws_instance.near_proxy
 }
