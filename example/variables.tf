@@ -47,7 +47,6 @@ variable proxies {
   description = "Configuration for zero or more proxies in each availability zone."
   type = object({
     az1 = map(object({
-    //Insert vars needed
     }))
 
   default = {
