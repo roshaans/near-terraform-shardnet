@@ -1,4 +1,4 @@
-*.terraform
-*.autovars.tf
-*.terraform.tfstate.lock.info
-*.terraform.tfstate
+.terraform/
+terraform.tfstate
+terraform.tfstate.lock.info
+terraform.tfvars
