@@ -1,4 +1,4 @@
-example/.terraform
-example/secret.autovars.tf
-example/.terraform.tfstate.lock.info
-example/terraform.tfstate
+*.terraform
+*.autovars.tf
+*.terraform.tfstate.lock.info
+*.terraform.tfstate
