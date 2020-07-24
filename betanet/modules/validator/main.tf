@@ -3,7 +3,7 @@ module "ami" {
 }
 
 resource "aws_instance" "near_validator" {
-  for_each = var.validators
+  
 
   ami                    = module.ami.ami_ids.ubuntu_18_04
   instance_type          = var.instance_type
@@ -19,13 +19,13 @@ resource "aws_instance" "near_validator" {
     file("${path.module}/../startup-scripts/install-base.sh"),
     file("${path.module}/../startup-scripts/install-docker.sh"),
     file("${path.module}/../startup-scripts/install-chrony.sh"),
-    templatefile("${path.module}/../startup-scripts/run-validator-node.sh", {
-
-    }),
+   # templatefile("${path.module}/../startup-scripts/run-validator-node.sh", {  //Add startup script
+   #
+   # }),
     file("${path.module}/../startup-scripts/final-hardening.sh")
   ])
 
   tags = {
-    Name = "near-validator-${each.value.name}"
+    Name = "near-validator-${var.validator.validator_name}"
   }
 }

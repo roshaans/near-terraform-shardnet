@@ -3,7 +3,7 @@ module "ami" {
 }
 
 resource "aws_instance" "near_proxy" {
-  for_each = var.proxies
+  
 
   ami                         = module.ami.ami_ids.ubuntu_18_04
   instance_type               = var.instance_type
@@ -20,13 +20,13 @@ resource "aws_instance" "near_proxy" {
     file("${path.module}/../startup-scripts/install-base.sh"),
     file("${path.module}/../startup-scripts/install-docker.sh"),
     file("${path.module}/../startup-scripts/install-chrony.sh"),
-    templatefile("${path.module}/../startup-scripts/run-proxy-node.sh", {
-
-    }),
+    # templatefile("${path.module}/../startup-scripts/run-proxy-node.sh", {     //Set up with running script
+    #
+    # // }),
     file("${path.module}/../startup-scripts/final-hardening.sh")
   ])
 
   tags = {
-    Name = "near-proxy-${each.value.validator_name}"
+    Name = "near-proxy-${var.proxy.validator_name}"
   }
 }

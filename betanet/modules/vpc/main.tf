@@ -46,7 +46,7 @@ module "near_private_subnet_1" {
   vpc_id               = aws_vpc.near.id
   cidr_block           = var.cidr_blocks.subnet_1_private
   availability_zone_id = data.aws_availability_zones.available.zone_ids[0]
-  nat_gateway_id       = module.near_public_subnet_az1.nat_gateway_id
+  nat_gateway_id       = module.near_public_subnet_1.nat_gateway_id
   vpc_cidr_block       = aws_vpc.near.cidr_block
 }
 
@@ -229,8 +229,8 @@ resource "aws_security_group_rule" "proxy_allow_prometheus_inbound" {
 
 resource "aws_security_group_rule" "proxy_allow_grafana_inbound" {
   type              = "ingress"
-  from_port         = 3030
-  to_port           = 3030
+  from_port         = 3000
+  to_port           = 3000
   protocol          = "tcp"
   security_group_id = aws_security_group.proxy.id
   cidr_blocks       = ["0.0.0.0/0"]
