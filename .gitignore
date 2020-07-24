@@ -1,4 +1,4 @@
-**.terraform/
-**terraform.tfstate
-**terraform.tfstate.lock.info
-**terraform.tfvars
+/example/.terraform/
+/example/terraform.tfstate
+/example/terraform.tfstate.lock.info
+/example/terraform.tfvars
