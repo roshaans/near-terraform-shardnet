@@ -5,7 +5,7 @@ variable instance_type {
 
 variable subnet_id {
   type        = string
-  description = "Subnet ID to place this proxy. This should be a public subnet from your Celo VPC."
+  description = "Subnet ID to place this proxy. This should be a public subnet from your near VPC."
 }
 
 variable security_group_id {
@@ -24,20 +24,11 @@ variable volume_size {
   default     = 256
 }
 
-variable near_image {
-  type        = string
-  description = "Name of the docker image to run"
-}
-
-variable near_network_id {
-  type        = string
-  description = "Celo network ID to join"
-}
-
-
-variable validators {
+variable validator {
   description = "Map of validator configurations"
-  type = map(object({
+  type = object({
+    validator_name = string
+  })
 
-  }))
+
 }

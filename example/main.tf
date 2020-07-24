@@ -9,7 +9,7 @@ terraform {
   #
   # backend "s3" {
   #     bucket          = "mybucket"
-  #     key             = "mytfs/celo/terraform.tfstate"
+  #     key             = "mytfs/near/terraform.tfstate"
   #     region          = "myregion"
 
   #     dynamodb_table  = "mydynamodb_table"
@@ -17,15 +17,12 @@ terraform {
   # }
 }
 
-module "celo_cluster" {
+module "near_cluster" {
   source = "../betanet"
 
   region                       = var.region
   cidr_blocks                  = var.cidr_blocks
   key_pair_name                = var.key_pair_name
-  near_image                   = var.celo_image
-  near_network_id              = var.celo_network_id
-  proxies                      = var.proxies
-  validators                   = var.validators
-  attestation_services         = var.attestation_services
+  proxy                        = var.proxy
+  validator                    = var.validator
 }
