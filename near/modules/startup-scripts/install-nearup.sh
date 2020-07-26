@@ -29,12 +29,12 @@ source ~/.profile
 
 #Start nearup, stop, replace keys and start again
 cd
-echo -ne ${stakingpool_id} | nearup betanet 
+echo -ne ${stakingpool_id} | nearup ${network} 
 nearup stop
 cd $NEAR_DIRECTORY
 echo -n '${validator_key}' > validator_key.json
 echo -n '${node_key}' > node_key.json
-nearup betanet 
+nearup ${network} 
 
 
 
