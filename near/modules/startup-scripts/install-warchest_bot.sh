@@ -7,7 +7,18 @@
 
 npm install -g near-shell
 git clone https://github.com/eorituz/near_warchest.git
+
+
 #Adapt const.py
+cd near_warchest
+
+sed -i  "s/stakeing.arno_nym.betanet/${stakepool_id}/g" const.py
+sed -i  "s/arno_nym.betanet/${account_id}/g" const.py
+sed -i  "s/betanet/${network}/g" const.py
+sed -i  "s/1.3/${seat_price_percentage}/g" const.py
+sed -i  "s/1.1/${lower_bid_threshold}/g" const.py
+sed -i  "s/1.8/${upper_bid_threshold/g" const.py
+
 
 
 PYTHON_PATH=$(whereis python)

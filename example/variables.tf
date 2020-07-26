@@ -25,6 +25,11 @@ variable key_pair_name {
   description = "SSH key pair name"
 }
 
+variable network {
+  type        = string
+  description = "Near network" #eg Betanet, Testnet or Mainnet
+}
+
 variable proxy {
   description = "Configuration for zero or more proxies in each availability zone."
   type = object({
@@ -35,6 +40,10 @@ variable proxy {
     node_key       = string
     account_id     = string
     stakingpool_id = string
+    #Warchest configuration
+    seat_price_percentage = number
+    lower_bid_threshold = number
+    upper_bid_threshold = number
     })
 
   default = {    
@@ -45,6 +54,9 @@ variable proxy {
       node_key       = "test"
       account_id     = "test"
       stakingpool_id = "test"
+      seat_price_percentage = 1
+      lower_bid_threshold = 1
+      upper_bid_threshold = 1
       }
 }
 
