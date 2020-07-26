@@ -6,6 +6,7 @@ POOL_ID=${stakingpool_id}
 
 
 cd
+
 #Run Node Exporter on the Node
 docker run -dit \
     --restart always \
@@ -18,7 +19,6 @@ docker run -dit \
     --path.sysfs=/host/sys
 
 #Run Near Exporter on the Node
-pwd
 git clone https://github.com/masknetgoal634/near-prometheus-exporter
 cd near-prometheus-exporter
 docker build -t near-prometheus-exporter .
@@ -30,8 +30,6 @@ docker run -dit \
     near-prometheus-exporter:latest /dist/main -accountId "$POOL_ID"
 
 #Configure the Near Node as Target on Prometheus Server
-pwd 
-
 #Edit file to add this servers IP
 IP=$(curl ifconfig.me)
 sed -i  "s/<NODE_IP_ADDRESS>/"$IP"/g" etc/prometheus/prometheus.yml
@@ -47,7 +45,6 @@ docker run -dti \
 
 #Run Grafana
 USR=$(id -u)
-
 chown -R "$USR:$USR" etc/grafana/*
 
 docker run -dit \
@@ -61,6 +58,5 @@ docker run -dit \
     -p 3000:3000 grafana/grafana
 
 #Grafana Email Notification Alert
-pwd
 sed -i  "s/<your_gmail_address>/"$EMAIL_ADDRESS"/g" etc/grafana/custom.ini
 sed -i  "s/<your_gmail_password>/"$EMAIL_PASSWORD"/g" etc/grafana/custom.ini
