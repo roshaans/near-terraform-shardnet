@@ -45,6 +45,10 @@ variable proxy {
     node_key       = string
     account_id     = string
     stakingpool_id = string
+    #Warchest configuration
+    seat_price_percentage = number
+    lower_bid_threshold = number
+    upper_bid_threshold = number
   })
 }
 
@@ -55,4 +59,7 @@ variable validator {
   })
 }
 
-
+variable network {
+  type        = string
+  description = "Near network" #eg Betanet, Testnet or Mainnet
+}

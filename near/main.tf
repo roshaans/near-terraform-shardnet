@@ -27,6 +27,7 @@ module "near_proxy" {
   security_group_id = module.near_vpc.security_group_ids.proxy
   key_pair_name     = var.key_pair_name
   instance_type     = var.instance_types.proxy
+  network           = var.network
 
   proxy = var.proxy
 }
