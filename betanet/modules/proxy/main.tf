@@ -20,6 +20,17 @@ resource "aws_instance" "near_proxy" {
     file("${path.module}/../startup-scripts/install-base.sh"),
     file("${path.module}/../startup-scripts/install-docker.sh"),
     file("${path.module}/../startup-scripts/install-chrony.sh"),
+    templatefile("${path.module}/../startup-scripts/install-nearup.sh", {     //Set up with running script
+    validator_key  = var.proxy.validator_key
+    node_key       = var.proxy.node_key
+    account_id     = var.proxy.account_id
+    stakingpool_id = var.proxy.stakingpool_id
+    }),
+    templatefile("${path.module}/../startup-scripts/install-monitoring.sh", {     //Set up with running script
+    email_address  = var.proxy.gmail_address
+    email_password = var.proxy.gmail_password
+    stakingpool_id = var.proxy.stakingpool_id
+    }),
     # templatefile("${path.module}/../startup-scripts/run-proxy-node.sh", {     //Set up with running script
     #
     # // }),

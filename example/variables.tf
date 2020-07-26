@@ -29,10 +29,22 @@ variable proxy {
   description = "Configuration for zero or more proxies in each availability zone."
   type = object({
     validator_name = string
+    gmail_address  = string
+    gmail_password = string
+    validator_key  = string
+    node_key       = string
+    account_id     = string
+    stakingpool_id = string
     })
 
   default = {    
       validator_name = "test"
+      gmail_address  = "test"
+      gmail_password = "test"
+      validator_key  = "test"
+      node_key       = "test"
+      account_id     = "test"
+      stakingpool_id = "test"
       }
 }
 
@@ -47,4 +59,5 @@ variable validator {
      validator_name = "test"
     }
   }
+
 
