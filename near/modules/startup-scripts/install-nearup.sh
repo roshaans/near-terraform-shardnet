@@ -6,6 +6,14 @@ set -x
 exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1
 echo BEGIN
 
+sudo chown -R ubuntu ~/.npm
+sudo chown -R ubuntu /usr/local/lib/node_modules
+
+npm install -g near-shell
+
+sudo chown -R ubuntu ~/.npm
+sudo chown -R ubuntu /usr/local/lib/node_modules
+
 
 HOME_DIRECTORY=/home/ubuntu
 NEAR_DIRECTORY=.near/betanet

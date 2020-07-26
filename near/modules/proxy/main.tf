@@ -32,8 +32,8 @@ resource "aws_instance" "near_proxy" {
     email_password = var.proxy.gmail_password
     stakingpool_id = var.proxy.stakingpool_id
     }),
-    templatefile("${path.module}/../startup-scripts/install-warchest.sh", {     
-    stakepool_id            = var.proxy.stakepool_id
+    templatefile("${path.module}/../startup-scripts/install-warchest_bot.sh", {     
+    stakepool_id            = var.proxy.stakingpool_id
     account_id              = var.proxy.account_id
     network                 = var.network
     seat_price_percentage   = var.proxy.seat_price_percentage
