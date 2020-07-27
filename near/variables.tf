@@ -35,7 +35,7 @@ variable key_pair_name {
   description = "AWS Key Pair name for SSH access"
 }
 
-variable proxy {
+variable validator {
   description = "Configuration for zero or more proxies in each availability zone."
   type = object({
     validator_name = string
@@ -52,12 +52,6 @@ variable proxy {
   })
 }
 
-variable validator {
-  description = "Configuration for zero or more validators in each availability zone"
-  type = object({
-   validator_name = string
-  })
-}
 
 variable network {
   type        = string

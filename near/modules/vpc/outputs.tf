@@ -2,8 +2,7 @@ output security_group_ids {
   value = {
     bastion             = aws_security_group.bastion.id
     full_node           = aws_security_group.full_node.id
-    validator           = aws_security_group.validator.id
-    proxy               = aws_security_group.proxy.id
+    validator               = aws_security_group.validator.id
   }
 }
 
