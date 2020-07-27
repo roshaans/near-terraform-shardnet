@@ -15,10 +15,9 @@ sudo chown -R ubuntu /usr/local/lib/node_modules
 
 
 #Install near-shell
-echo 'export NODE_ENV=betanet=' >> ~/.bashrc 
+echo 'export NODE_ENV=betanet' >> ~/.bashrc 
+su - ubuntu -c echo 'export NODE_ENV=betanet' >> ~/.profile 
 su - ubuntu -c yes | npm install -g near-shell
-
-
 
 
 HOME_DIRECTORY=/home/ubuntu
