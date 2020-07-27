@@ -1,3 +1,4 @@
+  
 variable instance_type {
   type        = string
   description = "AWS instance type for this node"
@@ -25,10 +26,25 @@ variable volume_size {
 }
 
 variable validator {
-  description = "Map of validator configurations"
+  description = "Configuration for zero or more proxies in each availability zone."
   type = object({
     validator_name = string
+    gmail_address  = string
+    gmail_password = string
+    validator_key  = string
+    node_key       = string
+    account_id     = string
+    stakingpool_id = string
+    #Warchest configuration
+    seat_price_percentage = number
+    lower_bid_threshold = number
+    upper_bid_threshold = number
   })
-
-
 }
+
+variable network {
+  type        = string
+  description = "Near network" #eg Betanet, Testnet or Mainnet
+}
+
+
