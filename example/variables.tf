@@ -30,7 +30,7 @@ variable network {
   description = "Near network" #eg Betanet, Testnet or Mainnet
 }
 
-variable validator {
+variable proxy {
   description = "Configuration for zero or more proxies in each availability zone."
   type = object({
     validator_name = string
@@ -60,6 +60,16 @@ variable validator {
       }
 }
 
+variable validator {
+  description = "Configuration for zero or more validators in each availability zone"
+  type = object({
+    validator_name = string
+ 
+  })
 
+  default = {
+     validator_name = "test"
+    }
+  }
 
 
