@@ -46,18 +46,7 @@ variable validator {
     upper_bid_threshold = number
     })
 
-  default = {    
-      validator_name = "test"
-      gmail_address  = "test"
-      gmail_password = "test"
-      validator_key  = "test"
-      node_key       = "test"
-      account_id     = "test"
-      stakingpool_id = "test"
-      seat_price_percentage = 1
-      lower_bid_threshold = 1
-      upper_bid_threshold = 1
-      }
+
 }
 
 
