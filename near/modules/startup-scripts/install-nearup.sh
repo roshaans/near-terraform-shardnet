@@ -1,24 +1,29 @@
 #! /bin/bash
 
-
-#Set up logging for error checking
+#Set login
 set -x
 exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1
 echo BEGIN
 
+
+#Install node v 12 and npm
+su - ubuntu -c yes | curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+su - ubuntu -c yes | sudo apt-get install nodejs
+su - ubuntu -c yes | sudo apt install npm 
 sudo chown -R ubuntu ~/.npm
 sudo chown -R ubuntu /usr/local/lib/node_modules
 
-npm install -g near-shell
 
-sudo chown -R ubuntu ~/.npm
-sudo chown -R ubuntu /usr/local/lib/node_modules
+#Install near-shell
+echo 'export NODE_ENV=betanet=' >> ~/.bashrc 
+su - ubuntu -c yes | npm install -g near-shell
+
+
 
 
 HOME_DIRECTORY=/home/ubuntu
 NEAR_DIRECTORY=.near/betanet
 export HOME=/root
-mkdir $HOME_DIRECTORY
 cd $HOME_DIRECTORY
 
 #Install nearup and make globally executable
