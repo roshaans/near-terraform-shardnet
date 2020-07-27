@@ -25,7 +25,6 @@ variable instance_types {
 
   default = {
     bastion             = "t3.micro"
-    proxy               = "t3.medium" # t3.medium to keep costs low in dev. Use c5.xlarge or similar in production
     validator           = "t3.medium" # t3.medium to keep costs low in dev. Use c5.xlarge or similar in production
   }
 }
