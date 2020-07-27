@@ -24,6 +24,5 @@ module "near_cluster" {
   network                      = var.network
   cidr_blocks                  = var.cidr_blocks
   key_pair_name                = var.key_pair_name
-  proxy                        = var.proxy
   validator                    = var.validator
 }
