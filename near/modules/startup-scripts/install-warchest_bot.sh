@@ -4,14 +4,18 @@
 #Creates a warchest of staked tokens, and dynamically maintain no more than one seat
 #Using code from https://github.com/eorituz/near_warchest by https://github.com/eorituz
 
-cd
 
+#set $HOME for build to be pllaced in ubuntu 
+
+cd /home/ubuntu
+
+#install near shell
 npm install -g near-shell
 git clone https://github.com/eorituz/near_warchest.git
 
-pwd
+
 #Adapt const.py
-cd near_warchest
+cd /home/ubuntu/near_warchest
 pwd
 sed -i  "s/stakeing.arno_nym.betanet/${stakepool_id}/g" const.py
 sed -i  "s/arno_nym.betanet/${account_id}/g" const.py
@@ -35,7 +39,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
-ExecStart=/usr/bin/python3.6 /root/near_warchest/warchest.py
+ExecStart=/usr/bin/python3.6 /home/ubuntu/near_warchest/warchest.py
 
 [Install]
 WantedBy=multi-user.target

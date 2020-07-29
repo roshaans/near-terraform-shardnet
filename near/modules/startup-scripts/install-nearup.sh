@@ -5,44 +5,42 @@ set -x
 exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1
 echo BEGIN
 
+#change $HOME to install packages as ubuntu
+export HOME=/home/ubuntu
+NEAR_DIRECTORY=.near/${network}
+cd $HOME
+
 
 #Install node v 12 and npm
 su - ubuntu -c yes | curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 su - ubuntu -c yes | sudo apt-get install nodejs
 su - ubuntu -c yes | sudo apt install npm 
-sudo chown -R ubuntu ~/.npm
-sudo chown -R ubuntu /usr/local/lib/node_modules
+
 
 
 #Install near-shell
 echo 'export NODE_ENV=betanet' >> ~/.bashrc 
-su - ubuntu -c echo 'export NODE_ENV=betanet' >> ~/.profile 
-su - ubuntu -c yes | npm install -g near-shell
+su - ubuntu -c echo 'export NODE_ENV=betanet' >> $HOME/.profile 
+su - ubuntu -c sudo yes | npm install -g near-shell
 
 
-HOME_DIRECTORY=/home/ubuntu
-NEAR_DIRECTORY=.near/betanet
-export HOME=/root
-cd $HOME_DIRECTORY
-
+pwd
 #Install nearup and make globally executable
-apt-get update
-apt-get --assume-yes install python3 git curl
-curl --proto '=https' --tlsv1.2 -sSfL https://up.near.dev | python3
+su - ubuntu -c apt-get update
+su - ubuntu -c 'apt-get --assume-yes install python3 git curl'
+su - ubuntu -c  'curl --proto "=https" --tlsv1.2 -sSfL https://up.near.dev | python3'
 
-sed -e 's|/root/.nearup/env:||g' -i /etc/environment 
-sed -e 's|PATH="\(.*\)"|PATH="/root/.nearup/env:\1"|g' -i /etc/environment
+#Load on interactive bash 
+echo 'source $HOME/.nearup/env' >> ~/.bashrc 
 
-sed -e 's|/root/.nearup/env:||g' -i ~/.profile 
-sed -e 's|PATH="\(.*\)"|PATH="/root/.nearup/env:\1"|g' -i ~/.profile
-
+#Ensure nearup is available
 source ~/.profile
 
-
 #Start nearup, stop, replace keys and start again
-cd
+cd $HOME
 echo -ne ${stakingpool_id} | nearup ${network} 
 nearup stop
+pwd
 cd $NEAR_DIRECTORY
 rm -rf data
 echo -n '${validator_key}' > validator_key.json
