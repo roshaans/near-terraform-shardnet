@@ -19,9 +19,11 @@ Inside the [near](./near) folder you will find a module (and submodules) to crea
 
 All nodes run on the Ubuntu LTS 18.04 AMI. Running `terraform apply` will select the latest available AMI.
 
+
 ## Hardening & Security
 
 Near nodes will get provisioned with some recommended security settings from [Celo](https://www.celo.org) cLab's Security Audit team. Most of this hardening is done in `install-base.sh` and `final-hardening.sh`. 
+
 
 ## Requirements
 
@@ -49,9 +51,27 @@ This infracstructure setup is using [AWS](https://aws.amazon.com/). You will nee
 
 ```Terraform Apply```
 
+### SSH
+
+To access the node you will first need to access the bastion as it is the only IP you shh into the validator. To do that:
+
+```ssh-add -K /path/to/your/key.pem```
+
+```ssh -A ubuntu@<BastionIP>```
+
+```ssh ubuntu@<validatorIP>```
+
+
+## Installed Packages
+ 
+
 ### Nearup
 
-Nearup is NEAR's public scripts to launch near betanet and testnet node. This is installed on provisioning.
+[Nearup](https://github.com/near/nearup) is NEAR's public scripts to launch near betanet and testnet node. This is installed on provisioning.
+
+### Near-shell
+
+[NEAR Shell](https://docs.near.org/docs/development/near-shell) is a fully featured NodeJS command line application that wraps near-api-js
 
 ### Prometheus and Grafana
 
