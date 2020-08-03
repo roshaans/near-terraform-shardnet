@@ -45,7 +45,7 @@ cd $NEAR_DIRECTORY
 rm -rf data
 echo -n '${validator_key}' > validator_key.json
 echo -n '${node_key}' > node_key.json
-nearup ${network} 
+nearup ${network} --image ${image}
 
 
 

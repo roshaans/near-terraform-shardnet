@@ -28,17 +28,18 @@ variable volume_size {
 variable validator {
   description = "Configuration for zero or more proxies in each availability zone."
   type = object({
-    validator_name = string
-    gmail_address  = string
-    gmail_password = string
-    validator_key  = string
-    node_key       = string
-    account_id     = string
-    stakingpool_id = string
+    validator_name            = string
+    gmail_address             = string
+    gmail_password            = string
+    validator_key             = string
+    node_key                  = string
+    account_id                = string
+    stakingpool_id            = string
+    docker_image              = string
     #Warchest configuration
-    seat_price_percentage = number
-    lower_bid_threshold = number
-    upper_bid_threshold = number
+    seat_price_percentage     = number
+    lower_bid_threshold       = number
+    upper_bid_threshold       = number
   })
 }
 

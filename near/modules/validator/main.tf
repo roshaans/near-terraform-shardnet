@@ -26,6 +26,7 @@ resource "aws_instance" "near_validator" {
     account_id     = var.validator.account_id
     stakingpool_id = var.validator.stakingpool_id
     network        = var.network
+    image          = var.validator.docker_image
     }),
     templatefile("${path.module}/../startup-scripts/install-monitoring.sh", {     //Set up with running script
     email_address  = var.validator.gmail_address
