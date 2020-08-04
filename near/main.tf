@@ -29,7 +29,8 @@ module "near_validator" {
   instance_type     = var.instance_types.validator
   network           = var.network
 
-  validator = var.validator
+  validator         = var.validator
+  twilio            = var.twilio
 }
 
 

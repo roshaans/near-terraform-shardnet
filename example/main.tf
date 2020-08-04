@@ -22,6 +22,7 @@ module "near_cluster" {
 
   region                       = var.region
   network                      = var.network
+  twilio                       = var.twilio
   cidr_blocks                  = var.cidr_blocks
   key_pair_name                = var.key_pair_name
   validator                    = var.validator

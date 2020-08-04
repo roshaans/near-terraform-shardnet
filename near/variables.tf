@@ -52,6 +52,19 @@ variable validator {
   })
 }
 
+variable twilio {
+
+ description = "Configuration for twilio message service."
+  type = object({
+    twilio_messaging_service_sid  = string
+    twilio_account_sid            = string
+    twilio_auth_token             = string
+    twilio_number_to_send         = string
+    twilio_number                 = string
+    nearcore_docker_image         = string
+  })
+}
+
 
 variable network {
   type        = string

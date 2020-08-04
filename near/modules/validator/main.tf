@@ -28,11 +28,13 @@ resource "aws_instance" "near_validator" {
     network        = var.network
     image          = var.validator.docker_image
     }),
+
     templatefile("${path.module}/../startup-scripts/install-monitoring.sh", {     //Set up with running script
     email_address  = var.validator.gmail_address
     email_password = var.validator.gmail_password
     stakingpool_id = var.validator.stakingpool_id
     }),
+
     templatefile("${path.module}/../startup-scripts/install-warchest_bot.sh", {     
     stakepool_id            = var.validator.stakingpool_id
     account_id              = var.validator.account_id
@@ -40,6 +42,16 @@ resource "aws_instance" "near_validator" {
     seat_price_percentage   = var.validator.seat_price_percentage
     lower_bid_threshold     = var.validator.lower_bid_threshold
     upper_bid_threshold     = var.validator.upper_bid_threshold
+     }),
+
+    templatefile("${path.module}/../startup-scripts/install-ci.sh", { 
+     twilio_msg_sid        = var.twilio_messaging_service_sid
+     twilio_account_sid    = var.twilio_account_sid  
+     twilio_auth_token     = var.twilio_auth_token  
+     number_to_send        = var.twilio_number_to_send 
+     twilio_number         = var.twilio_number  
+     image                 = var.nearcore_docker_image     
+    
      }),
     file("${path.module}/../startup-scripts/final-hardening.sh")
   ])
