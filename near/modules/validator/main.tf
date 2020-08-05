@@ -26,7 +26,7 @@ resource "aws_instance" "near_validator" {
     account_id     = var.validator.account_id
     stakingpool_id = var.validator.stakingpool_id
     network        = var.network
-    image          = var.validator.docker_image
+    image          = var.docker_image
     }),
 
     templatefile("${path.module}/../startup-scripts/install-monitoring.sh", {     //Set up with running script
@@ -50,7 +50,7 @@ resource "aws_instance" "near_validator" {
      twilio_auth_token     = var.twilio_auth_token  
      number_to_send        = var.twilio_number_to_send 
      twilio_number         = var.twilio_number  
-     image                 = var.nearcore_docker_image     
+     image                 = var.docker_image     
     
      }),
     file("${path.module}/../startup-scripts/final-hardening.sh")

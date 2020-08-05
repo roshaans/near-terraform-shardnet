@@ -14,7 +14,6 @@ validator = {
     node_key            = "{\"account_id\": \"\",\"public_key\": \"ed25519:6vbbidaCaGMPFjPmQg96g73B64hfbgLa19edkbnUjLTs\",\"secret_key\": \"ed25519:RCgPKEcAPms7ve9FQY1yMVZgdz7RphmBjisbhYsdyZ6V8D5wFoawQzMBNYSm8em37ZYUVZKkT5mgRDMz9aznedF\"}" #Your node key
     account_id          = "account@betanet" #the account you hold your warchest tokens in
     stakingpool_id      = "stakepool.stakehouse.betanet" #Your staking pool contract address
-    docker _image       = yourdockername/image #image of the docker build from the github action for CI
 
 }
 
@@ -24,5 +23,6 @@ twilio = {
     twilio_auth_token             = string
     twilio_number_to_send         = string
     twilio_number                 = string
-    nearcore_docker_image         = string
 }
+
+docker_image =

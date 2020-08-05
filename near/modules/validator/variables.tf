@@ -61,4 +61,9 @@ variable twilio {
   })
 }
 
+variable docker_image {
+  type        = string
+  description = "Name of your docker repository" 
+}
+
 
