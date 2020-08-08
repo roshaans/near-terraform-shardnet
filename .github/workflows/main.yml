@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         release-name: ["rc", "beta"]
+        fail-fast: true
     steps:
       - uses: actions/checkout@v2
       - name: Get Github Tag
