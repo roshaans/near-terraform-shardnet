@@ -11,9 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true
       matrix:
         release-name: ["rc", "beta"]
-        fail-fast: true
     steps:
       - uses: actions/checkout@v2
       - name: Get Github Tag
