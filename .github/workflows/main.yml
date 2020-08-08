@@ -72,7 +72,7 @@ jobs:
           ref: ${{ env.RELEASE_VERSION }}
 
       - name: Cargo Test
-        run: cargo test    
+        run: cargo test --test test_errors    
 
       - name: Publish Latest Docker Image to Registry
         if: ${{ success() }}
