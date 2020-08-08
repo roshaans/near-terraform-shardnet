@@ -2,7 +2,7 @@ name: nearcore-docker-ci
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/60 * * * *'
 
 env:
   DOCKER_BUILDKIT: 1 
