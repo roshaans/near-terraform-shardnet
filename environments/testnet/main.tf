@@ -1,24 +1,27 @@
+//------------------------------------------------
+//                     Testnet                   |
+//------------------------------------------------
+
 provider "aws" {
   region = var.region
 }
 
 terraform {
   required_version = ">= 0.12.0"
-  # We recommend using remote state for production configs. 
-  # Uncomment and update the config block below to use remote state.
-  #
-  # backend "s3" {
-  #     bucket          = "mybucket"
-  #     key             = "mytfs/near/terraform.tfstate"
-  #     region          = "myregion"
+   
+   
+   backend "s3" {
+       bucket          = "near-protocol"
+       key             = "near/betanet/terraform.tfstate"
+       region          = "app-state"
 
-  #     dynamodb_table  = "mydynamodb_table"
-  #     encrypt         = true
-  # }
+       dynamodb_table  = "mydynamodb_table"
+       encrypt         = true
+   }
 }
 
 module "near_cluster" {
-  source = "../near"
+  source = "../../near"
 
   region                       = var.region
   network                      = var.network
