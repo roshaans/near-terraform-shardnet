@@ -1,3 +1,7 @@
+//------------------------------------------------
+//                     Testnet                   |
+//------------------------------------------------
+
 variable region {
   type        = string
   description = "AWS Region to provision this cluster"
