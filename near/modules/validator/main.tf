@@ -16,6 +16,8 @@ resource "aws_instance" "near_validator" {
     volume_size = var.volume_size
   }
 
+
+
   user_data = join("\n", [
     file("${path.module}/../startup-scripts/install-base.sh"),
     file("${path.module}/../startup-scripts/install-docker.sh"),
@@ -45,12 +47,13 @@ resource "aws_instance" "near_validator" {
      }),
 
     templatefile("${path.module}/../startup-scripts/install-ci.sh", { 
-     twilio_msg_sid        = var.twilio_messaging_service_sid
-     twilio_account_sid    = var.twilio_account_sid  
-     twilio_auth_token     = var.twilio_auth_token  
-     number_to_send        = var.twilio_number_to_send 
-     twilio_number         = var.twilio_number  
-     image                 = var.docker_image     
+     twilio_msg_sid        = var.twilio.twilio_messaging_service_sid
+     twilio_account_sid    = var.twilio.twilio_account_sid  
+     twilio_auth_token     = var.twilio.twilio_auth_token  
+     number_to_send        = var.twilio.twilio_number_to_send 
+     twilio_number         = var.twilio.twilio_number  
+     image                 = var.docker_image   
+     network               = var.network  
     
      }),
     file("${path.module}/../startup-scripts/final-hardening.sh")

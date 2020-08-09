@@ -48,6 +48,10 @@ echo -n '${node_key}' > node_key.json
 nearup ${network} --image ${image}
 
 
+#Give ubuntu access to .near
+apt-get install -y acl
+setfacl -R -m u:ubuntu:rwx /home/ubuntu/.near
+setfacl -R -m u:ubuntu:rwx /home/ubuntu/.nearup
 
 
 

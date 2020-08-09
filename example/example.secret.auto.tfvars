@@ -17,12 +17,14 @@ validator = {
 
 }
 
+network = "betanet"
+
 twilio = {
-    twilio_messaging_service_sid  = string
-    twilio_account_sid            = string
-    twilio_auth_token             = string
-    twilio_number_to_send         = string
-    twilio_number                 = string
+    twilio_messaging_service_sid  = "MG775f284286a9e20aassddwff81bab118"
+    twilio_account_sid            = "AC925c6aa32894a39d1d7sjnevgiib9594"
+    twilio_auth_token             = "579d06428a08a2ac3f0ee856dnfhuidd"
+    twilio_number_to_send         = "+17787878788"
+    twilio_number                 = "+16047889799"
 }
 
-docker_image =
+docker_image = "yourrepository/nearcore:beta"

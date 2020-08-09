@@ -35,7 +35,6 @@ variable validator {
     node_key                  = string
     account_id                = string
     stakingpool_id            = string
-    docker_image              = string
     #Warchest configuration
     seat_price_percentage     = number
     lower_bid_threshold       = number
@@ -57,7 +56,6 @@ variable twilio {
     twilio_auth_token             = string
     twilio_number_to_send         = string
     twilio_number                 = string
-    nearcore_docker_image         = string
   })
 }
 
