@@ -2,7 +2,7 @@ name: nearcore-docker-ci
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/10 * * * *'
 
 env:
   DOCKER_BUILDKIT: 1 
@@ -71,7 +71,7 @@ jobs:
           ref: ${{ env.RELEASE_VERSION }}
 
       - name: Cargo Test
-        run: cargo test --test test_errors    
+        run: cargo test    
 
       - name: Publish Latest Docker Image to Registry
         if: ${{ success() }}

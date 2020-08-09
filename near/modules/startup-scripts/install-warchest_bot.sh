@@ -38,7 +38,7 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-User=root
+User=ubuntu
 ExecStart=/usr/bin/python3.6 /home/ubuntu/near_warchest/warchest.py
 
 [Install]

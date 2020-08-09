@@ -28,8 +28,9 @@ module "near_validator" {
   key_pair_name     = var.key_pair_name
   instance_type     = var.instance_types.validator
   network           = var.network
-
-  validator = var.validator
+  validator         = var.validator
+  twilio            = var.twilio
+  docker_image      = var.docker_image
 }
 
 
@@ -41,6 +42,7 @@ resource "random_password" "password" {
   min_upper   = 1
   min_numeric = 1
 }
+
 
 
 

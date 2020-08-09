@@ -16,6 +16,8 @@ resource "aws_instance" "near_validator" {
     volume_size = var.volume_size
   }
 
+
+
   user_data = join("\n", [
     file("${path.module}/../startup-scripts/install-base.sh"),
     file("${path.module}/../startup-scripts/install-docker.sh"),
@@ -26,12 +28,15 @@ resource "aws_instance" "near_validator" {
     account_id     = var.validator.account_id
     stakingpool_id = var.validator.stakingpool_id
     network        = var.network
+    image          = var.docker_image
     }),
+
     templatefile("${path.module}/../startup-scripts/install-monitoring.sh", {     //Set up with running script
     email_address  = var.validator.gmail_address
     email_password = var.validator.gmail_password
     stakingpool_id = var.validator.stakingpool_id
     }),
+
     templatefile("${path.module}/../startup-scripts/install-warchest_bot.sh", {     
     stakepool_id            = var.validator.stakingpool_id
     account_id              = var.validator.account_id
@@ -39,6 +44,17 @@ resource "aws_instance" "near_validator" {
     seat_price_percentage   = var.validator.seat_price_percentage
     lower_bid_threshold     = var.validator.lower_bid_threshold
     upper_bid_threshold     = var.validator.upper_bid_threshold
+     }),
+
+    templatefile("${path.module}/../startup-scripts/install-ci.sh", { 
+     twilio_msg_sid        = var.twilio.twilio_messaging_service_sid
+     twilio_account_sid    = var.twilio.twilio_account_sid  
+     twilio_auth_token     = var.twilio.twilio_auth_token  
+     number_to_send        = var.twilio.twilio_number_to_send 
+     twilio_number         = var.twilio.twilio_number  
+     image                 = var.docker_image   
+     network               = var.network  
+    
      }),
     file("${path.module}/../startup-scripts/final-hardening.sh")
   ])

@@ -87,3 +87,14 @@ This was Near's Stake Wars Challenge 4 and utilizes a package built by [eorituz]
 
 *Note: Currently the user would have to ssh into the validator machine and login to NEAR ``` near login ``` for the Warchest bot to operate correctly*
 
+### CI Integration
+
+A CI Workflow that will check the latest release of nearcore and will build from source, test and create a docker image in a docker repository you create. Props go to [masknetgoal634](https://github.com/masknetgoal634) for his implementation [here](https://github.com/masknetgoal634/nearcore-deploy). 
+
+Add these 3 secrets to your Gthub secrets(for a detailed look at whats happening please view the github link to the package):
+
+```
+DOCKER_IMAGE_NAME
+DOCKER_USERNAME
+DOCKER_PASSWORD
+```

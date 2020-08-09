@@ -25,7 +25,7 @@ variable instance_types {
 
   default = {
     bastion             = "t3.micro"
-    validator           = "t3.medium" # t3.medium to keep costs low in dev. Use c5.xlarge or similar in production
+    validator           = "t3.large" # t3.medium to keep costs low in dev. Use c5.xlarge or similar in production
   }
 }
 
@@ -37,17 +37,29 @@ variable key_pair_name {
 variable validator {
   description = "Configuration for zero or more proxies in each availability zone."
   type = object({
-    validator_name = string
-    gmail_address  = string
-    gmail_password = string
-    validator_key  = string
-    node_key       = string
-    account_id     = string
-    stakingpool_id = string
+    validator_name            = string
+    gmail_address             = string
+    gmail_password            = string
+    validator_key             = string
+    node_key                  = string
+    account_id                = string
+    stakingpool_id            = string
     #Warchest configuration
-    seat_price_percentage = number
-    lower_bid_threshold = number
-    upper_bid_threshold = number
+    seat_price_percentage     = number
+    lower_bid_threshold       = number
+    upper_bid_threshold       = number
+  })
+}
+
+variable twilio {
+
+ description = "Configuration for twilio message service."
+  type = object({
+    twilio_messaging_service_sid  = string
+    twilio_account_sid            = string
+    twilio_auth_token             = string
+    twilio_number_to_send         = string
+    twilio_number                 = string
   })
 }
 
@@ -55,4 +67,9 @@ variable validator {
 variable network {
   type        = string
   description = "Near network" #eg Betanet, Testnet or Mainnet
+}
+
+variable docker_image {
+  type        = string
+  description = "Name of your docker repository" 
 }
