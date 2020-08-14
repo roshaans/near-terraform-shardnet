@@ -4,7 +4,7 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
-!example.secrets.auto.tfvars
+!example.secret.auto.tfvars
 # Crash log files
 crash.log
 
