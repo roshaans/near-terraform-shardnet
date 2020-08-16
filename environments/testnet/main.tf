@@ -12,7 +12,7 @@ terraform {
    
    backend "s3" {
        bucket          = "near-protocol"
-       key             = "near/betanet/terraform.tfstate"
+       key             = "${var.bucket}/${var.network}/terraform.tfstate"
        region          = "app-state"
 
        dynamodb_table  = "mydynamodb_table"
@@ -30,4 +30,5 @@ module "near_cluster" {
   cidr_blocks                  = var.cidr_blocks
   key_pair_name                = var.key_pair_name
   validator                    = var.validator
+  aws_credentials              = var.credentials
 }

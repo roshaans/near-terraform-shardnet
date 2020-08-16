@@ -26,7 +26,7 @@ variable volume_size {
 }
 
 variable validator {
-  description = "Configuration for zero or more proxies in each availability zone."
+  description = "Configuration for the validator."
   type = object({
     validator_name            = string
     gmail_address             = string
@@ -62,6 +62,20 @@ variable twilio {
 variable docker_image {
   type        = string
   description = "Name of your docker repository" 
+}
+
+variable bucket {
+  type        = string
+  description = "the name of the bucket your state and backup is stored"
+}
+
+variable aws_credentials {
+
+ description = "Credentials to use only for access to the bucket with state and backup"
+  type = object({
+    aws_access_key_id      = string
+    aws_secret_access_key  = string
+  })
 }
 
 

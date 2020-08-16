@@ -34,6 +34,20 @@ variable network {
   description = "Near network" #eg Betanet, Testnet or Mainnet
 }
 
+variable bucket {
+  type        = string
+  description = "the name of the bucket your state and backup is stored"
+}
+
+variable aws_credentials {
+
+ description = "Credentials to use only for access to the bucket with state and backup"
+  type = object({
+    aws_access_key_id      = string
+    aws_secret_access_key  = string
+  })
+}
+
 variable twilio {
 
  description = "Configuration for twilio messaging service"

@@ -31,6 +31,9 @@ module "near_validator" {
   validator         = var.validator
   twilio            = var.twilio
   docker_image      = var.docker_image
+  bucket            = var.bucket
+  aws_credentials   = var.aws_credentials
+
 }
 
 

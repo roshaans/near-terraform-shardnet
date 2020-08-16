@@ -98,3 +98,8 @@ DOCKER_IMAGE_NAME
 DOCKER_USERNAME
 DOCKER_PASSWORD
 ```
+
+## Features
+
+
+### Automatic chain data backups 
