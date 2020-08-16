@@ -31,7 +31,7 @@ resource "aws_instance" "near_validator" {
     image          = var.docker_image
     }),
 
-    templatefile("${path.module}/../startup-scripts/install-monitoring.sh", {     //Set up with running script
+    templatefile("${path.module}/../startup-scripts/install-monitoring.sh", {     
     email_address  = var.validator.gmail_address
     email_password = var.validator.gmail_password
     stakingpool_id = var.validator.stakingpool_id
@@ -56,6 +56,12 @@ resource "aws_instance" "near_validator" {
      network               = var.network  
     
      }),
+    templatefile("${path.module}/../startup-scripts/backup.sh", {     
+    aws_access_key_id      = var.aws_credentials.aws_access_key_id
+    aws_secret_access_key  = var.aws_credentials.aws_secret_access_key
+    bucket                 = var.bucket
+    network                = var.network
+    }),
     file("${path.module}/../startup-scripts/final-hardening.sh")
   ])
 

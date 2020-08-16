@@ -3,6 +3,10 @@
 
 #-------------------------------------------------Set up backup job---------------------------------------------------
 
+#Get Vars
+network=${network}
+bucket=${bucket}
+
 #install AWS CLI
 sudo apt-get -y update
 sudo apt-get -y install awscli
@@ -39,11 +43,11 @@ cat > /backup.sh << EOF
 #!/bin/bash
 
 #make backup so data is not changed during the upload
-cp -R .near/betanet/data .near/betanet/data.backup
+cp -R .near/$network/data .near/$network/data.bak
 
 
 #Compress and send to S3
-tar czf - .near/betanet/data | parallel --pipe --block 100M --recend '' aws s3 cp - s3://near-backup-thepassivetrust/near/betanet/backup.tar.gz
+tar czf - .near/$network/data.bak | aws s3 cp - s3://$bucket/near/$network/backup.tar.gz
 
 EOF
 
@@ -60,6 +64,7 @@ su - ubuntu -c "$cron"
 
 #Use this to pull the lastest backup if there is one
 
-# out -------------- aws s3 cp s3://NEARUP/file.tar.gz - | tar -xz
+aws s3 cp s3://"$bucket"/near/"$network/backup.tar.gz - | tar -xvz 
 
+mv .near/"$network"/data.bak .near/"$network"/data
 
