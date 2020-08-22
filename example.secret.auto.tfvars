@@ -28,3 +28,5 @@ twilio = {
 }
 
 docker_image = "yourRepository/nearcore:beta"
+
+iniitial_startup = true

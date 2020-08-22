@@ -31,6 +31,7 @@ module "near_validator" {
   validator         = var.validator
   twilio            = var.twilio
   docker_image      = var.docker_image
+  initial_startup   = var.initial_startup
 }
 
 

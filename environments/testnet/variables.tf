@@ -68,5 +68,8 @@ variable docker_image {
   description = "Name of your docker repository" 
 }
 
-
+variable initial_startup {
+  type        = boolean
+  description = "Will allow the initial startup and sync of nearcore" 
+}
 

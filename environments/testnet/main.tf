@@ -12,17 +12,17 @@ terraform {
    
    backend "s3" {
        bucket          = "near-protocol"
-       key             = "near/betanet/terraform.tfstate"
-       region          = "app-state"
+       key             = "near/testnet/terraform.tfstate"
+       region          = "us-west-1"
 
-       dynamodb_table  = "mydynamodb_table"
+       dynamodb_table  = "app-state"
        encrypt         = true
    }
 }
 
 module "near_cluster" {
   source = "../../near"
-
+  initial_startup              = var.initial_startup
   region                       = var.region
   network                      = var.network
   twilio                       = var.twilio
