@@ -23,12 +23,13 @@ resource "aws_instance" "near_validator" {
     file("${path.module}/../startup-scripts/install-docker.sh"),
     file("${path.module}/../startup-scripts/install-chrony.sh"),
     templatefile("${path.module}/../startup-scripts/install-nearup.sh", {     //Set up with running script
-    validator_key  = var.validator.validator_key
-    node_key       = var.validator.node_key
-    account_id     = var.validator.account_id
-    stakingpool_id = var.validator.stakingpool_id
-    network        = var.network
-    image          = var.docker_image
+    validator_key    = var.validator.validator_key
+    node_key         = var.validator.node_key
+    account_id       = var.validator.account_id
+    stakingpool_id   = var.validator.stakingpool_id
+    network          = var.network
+    image            = var.docker_image
+    initialstartup  = var.initial_startup
     }),
 
     templatefile("${path.module}/../startup-scripts/install-monitoring.sh", {     //Set up with running script

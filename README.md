@@ -41,6 +41,8 @@ Alternatively you can take that tf files as base for customizing your deployment
 
 Populate the ``` secret.auto.tfvars ``` file with your near configuration details.
 
+If it the the first time on the network and you do not have keys or a pool set ```initial_startup = true```  and ssh in to create your stake pool. Testnet documentation can be found [here](https://github.com/nearprotocol/stakewars/blob/master/GUIDELINES.md#additional-guidelines-for-validators-joining-testnet)
+
 
 ### AWS
 

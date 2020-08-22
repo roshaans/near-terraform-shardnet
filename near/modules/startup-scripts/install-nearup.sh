@@ -8,6 +8,8 @@ echo BEGIN
 #change $HOME to install packages as ubuntu
 export HOME=/home/ubuntu
 NEAR_DIRECTORY=.near/${network}
+network=${network}
+initialstartup=${initialstartup}
 cd $HOME
 
 
@@ -19,8 +21,8 @@ su - ubuntu -c yes | sudo apt install npm
 
 
 #Install near-shell
-echo 'export NODE_ENV=betanet' >> ~/.bashrc 
-su - ubuntu -c echo 'export NODE_ENV=betanet' >> $HOME/.profile 
+echo "export NODE_ENV=$network" >> ~/.bashrc 
+su - ubuntu -c echo "export NODE_ENV=$network" >> $HOME/.profile 
 su - ubuntu -c sudo yes | npm install -g near-shell
 
 
@@ -39,13 +41,15 @@ source ~/.profile
 #Start nearup, stop, replace keys and start again
 cd $HOME
 echo -ne ${stakingpool_id} | nearup ${network} 
-nearup stop
-pwd
-cd $NEAR_DIRECTORY
-rm -rf data
-echo -n '${validator_key}' > validator_key.json
-echo -n '${node_key}' > node_key.json
-nearup ${network} --image ${image}
+if [ !$intialstartup ]; then
+    nearup stop
+    pwd
+    cd $NEAR_DIRECTORY
+    rm -rf data
+    echo -n '${validator_key}' > validator_key.json
+    echo -n '${node_key}' > node_key.json
+    nearup ${network} --image ${image}
+fi
 
 
 #Give ubuntu access to .near
