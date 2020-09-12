@@ -76,6 +76,6 @@ variable docker_image {
 
 
 variable initial_startup {
-  type        = boolean
+  type        = bool
   description = "Will allow the initial startup and sync of nearcore" 
 }
