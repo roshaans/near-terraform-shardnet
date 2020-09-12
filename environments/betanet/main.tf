@@ -22,7 +22,7 @@ terraform {
 module "near_cluster" {
   source = "../../near"
 
-  initail_startup              = var.initail_startup
+  initial_startup              = var.initial_startup
   region                       = var.region
   network                      = var.network
   twilio                       = var.twilio
