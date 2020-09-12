@@ -63,10 +63,6 @@ variable validator {
     })
 }
 
-variable docker_image {
-  type        = string
-  description = "Name of your docker repository" 
-}
 
 variable initial_startup {
   type        = bool
