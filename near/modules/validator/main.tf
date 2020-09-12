@@ -28,7 +28,6 @@ resource "aws_instance" "near_validator" {
     account_id       = var.validator.account_id
     stakingpool_id   = var.validator.stakingpool_id
     network          = var.network
-    image            = var.docker_image
     initialstartup  = var.initial_startup
     }),
 
@@ -52,8 +51,7 @@ resource "aws_instance" "near_validator" {
      twilio_account_sid    = var.twilio.twilio_account_sid  
      twilio_auth_token     = var.twilio.twilio_auth_token  
      number_to_send        = var.twilio.twilio_number_to_send 
-     twilio_number         = var.twilio.twilio_number  
-     image                 = var.docker_image   
+     twilio_number         = var.twilio.twilio_number    
      network               = var.network  
     
      }),

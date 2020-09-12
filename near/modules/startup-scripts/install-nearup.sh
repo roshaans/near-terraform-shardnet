@@ -29,8 +29,8 @@ su - ubuntu -c sudo yes | npm install -g near-shell
 pwd
 #Install nearup and make globally executable
 su - ubuntu -c apt-get update
-su - ubuntu -c 'apt-get --assume-yes install python3 git curl'
-su - ubuntu -c  'curl --proto "=https" --tlsv1.2 -sSfL https://up.near.dev | python3'
+su - ubuntu -c apt install python3 python3-pip
+su - ubuntu -c  pip3 install --user nearup
 
 #Load on interactive bash 
 echo 'source $HOME/.nearup/env' >> ~/.bashrc 
@@ -48,7 +48,7 @@ if [ !$intialstartup ]; then
     rm -rf data
     echo -n '${validator_key}' > validator_key.json
     echo -n '${node_key}' > node_key.json
-    nearup ${network} --image ${image}
+    nearup run ${network} 
 fi
 
 
