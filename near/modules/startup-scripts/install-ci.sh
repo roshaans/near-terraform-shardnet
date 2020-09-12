@@ -17,7 +17,6 @@ export TWILIO_ACCOUNT_SID=${twilio_account_sid}
 export TWILIO_AUTH_TOKEN=${twilio_auth_token}
 export TWILIO_NUMBER_TO_SEND=${number_to_send}
 export TWILIO_NUMBER=${twilio_number}
-export NEARCORE_DOCKER_IMAGE=${image}
 export NEAR_NETWORK=${network}
 x
 "

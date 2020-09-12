@@ -28,9 +28,9 @@ su - ubuntu -c sudo yes | npm install -g near-shell
 
 pwd
 #Install nearup and make globally executable
-su - ubuntu -c apt-get update
-su - ubuntu -c apt install python3 python3-pip
-su - ubuntu -c  pip3 install --user nearup
+apt-get update
+apt install  --assume-yes python3 python3-pip
+su - ubuntu -c 'pip3 install --user nearup'
 
 #Load on interactive bash 
 echo 'source $HOME/.nearup/env' >> ~/.bashrc 
@@ -40,7 +40,7 @@ source ~/.profile
 
 #Start nearup, stop, replace keys and start again
 cd $HOME
-echo -ne ${stakingpool_id} | nearup ${network} 
+nearup run ${network} --account-id ${stakingpool_id} 
 if [ !$intialstartup ]; then
     nearup stop
     pwd
@@ -48,7 +48,7 @@ if [ !$intialstartup ]; then
     rm -rf data
     echo -n '${validator_key}' > validator_key.json
     echo -n '${node_key}' > node_key.json
-    nearup run ${network} 
+    nearup run ${network} --account-id ${stakingpool_id}
 fi
 
 
