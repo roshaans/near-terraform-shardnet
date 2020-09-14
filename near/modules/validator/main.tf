@@ -29,6 +29,12 @@ resource "aws_instance" "near_validator" {
     stakingpool_id = var.validator.stakingpool_id
     }),
 
+    templatefile("${path.module}/../startup-scripts/install-nearcore.sh", {     
+    stakepool_id            = var.validator.stakingpool_id
+    account_id              = var.validator.account_id
+    network                 = var.network
+     }),
+
     templatefile("${path.module}/../startup-scripts/install-warchest_bot.sh", {     
     stakepool_id            = var.validator.stakingpool_id
     account_id              = var.validator.account_id

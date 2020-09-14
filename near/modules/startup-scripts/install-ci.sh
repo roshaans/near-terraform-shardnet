@@ -23,7 +23,7 @@ x
 
 su - ubuntu -c "$cmd"
 
-su - ubuntu -c "git clone --single-branch --branch V2/Docker https://github.com/abellinii/near-ci.git"
+su - ubuntu -c "git clone --single-branch --branch mainnet https://github.com/abellinii/near-ci.git"
 
 chmod +x /home/ubuntu/near-ci/updateNear.sh
 chmod +x /home/ubuntu/near-ci/twilio.sh
