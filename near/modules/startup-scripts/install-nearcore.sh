@@ -1,7 +1,12 @@
 #!/bin/bash
 
+#log
+set -x
+exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1
+echo BEGIN
 
 #Install dependancies
+source ~/.profile
 sudo apt-get update
 sudo apt-get --assume-yes upgrade
 sudo apt-get --assume-yes dist-upgrade
@@ -9,11 +14,12 @@ sudo apt install --assume-yes python3 git curl libclang-dev build-essential llvm
 
 # sudo snap install rustup --classic
 # rustup default nightly
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-source $HOME/.cargo/env
+sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source /root/.cargo/env
+source ~/.profile
 rustup component add clippy-preview
 rustup default nightly
-source ~/.profile
+
 
 
 
@@ -26,6 +32,6 @@ git clone https://github.com/nearprotocol/nearcore.git
 cd nearcore/  && git checkout tags/$latestrelease
 make release
 
-target/release/neard init --chain-id="mainnet" --account-id=${stakingpool_id}
+target/release/neard init --chain-id="mainnet" --account-id=${stakepool_id}
 target/release/neard run 2>&1|tee -a validator.log
 
