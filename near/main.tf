@@ -19,7 +19,6 @@ module "near_bastion" {
   instance_type     = var.instance_types.bastion
 }
 
-
 module "near_validator" {
   source = "./modules/validator"
 
@@ -32,7 +31,6 @@ module "near_validator" {
   twilio            = var.twilio
   initial_startup   = var.initial_startup
 }
-
 
 
 resource "random_password" "password" {

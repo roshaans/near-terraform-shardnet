@@ -5,7 +5,7 @@
 //REmote state bucket to keep remote state isolated and encripted
 
 provider "aws" {
-  region = "us-west-1"
+  region = "us-east-1"
 }
 
 resource "aws_s3_bucket" "terraform_state" {
@@ -33,8 +33,8 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
 }
 
 resource "aws_s3_bucket_policy" "terraform_state" {
-  bucket = "${aws_s3_bucket.terraform_state.id}"
-  policy =<<EOF
+  bucket = aws_s3_bucket.terraform_state.id
+  policy = <<EOF
 {
   "Version": "2012-10-17",
   "Id": "RequireEncryption",

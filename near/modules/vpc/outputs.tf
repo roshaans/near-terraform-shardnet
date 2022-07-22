@@ -1,12 +1,12 @@
-output security_group_ids {
+output "security_group_ids" {
   value = {
-    bastion             = aws_security_group.bastion.id
-    full_node           = aws_security_group.full_node.id
-    validator               = aws_security_group.validator.id
+    bastion   = aws_security_group.bastion.id
+    full_node = aws_security_group.full_node.id
+    validator = aws_security_group.validator.id
   }
 }
 
-output subnet_ids {
+output "subnet_ids" {
   value = {
     az1 = {
       private = module.near_private_subnet_1.id
@@ -15,6 +15,6 @@ output subnet_ids {
   }
 }
 
-output id {
+output "id" {
   value = aws_vpc.near.id
 }

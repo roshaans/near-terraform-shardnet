@@ -15,9 +15,9 @@ echo BEGIN
 # Run this script like - bash script-name.sh
 
 # Define versions
-INSTALL_NODE_VER=12
-INSTALL_NVM_VER=0.33.11
-INSTALL_YARN_VER=1.7.0
+INSTALL_NODE_VER=16
+INSTALL_NVM_VER=0.39
+INSTALL_YARN_VER=1.22.19
 
 # You can pass argument to this script --version 8
 if [ "$1" = '--version' ]; then
