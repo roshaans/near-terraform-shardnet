@@ -24,11 +24,6 @@ variable "cidr_blocks" {
   }
 }
 
-variable "key_pair_name" {
-  type        = string
-  description = "SSH key pair name"
-}
-
 variable "network" {
   type        = string
   description = "Near network" #eg Betanet, Testnet, Mainnet, or Shardnet
@@ -52,7 +47,6 @@ variable "validator" {
     gmail_address  = string
     gmail_password = string
     validator_key  = string
-    node_key       = string
     account_id     = string
     stakingpool_id = string
   })
@@ -62,6 +56,7 @@ variable "validator" {
 variable "initial_startup" {
   type        = bool
   description = "Will allow the initial startup and sync of nearcore"
+  default     = true
 }
 
 

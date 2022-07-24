@@ -11,7 +11,6 @@ Infrastructure and all kind of cloud resources are defined in modules, and Terra
 Inside the [near](./near) folder you will find a module (and submodules) to create the setup for running a NEAR Validator on AWS. The next logic resources can be created:
 
 - `vpc` module for setting up a VPC with a public and private subnet. bastion and validator nodes go in the public subnet(a private subnet is available to eventually allow for the validator and for sentry nodes in the public subnet).
-- `bastion` module for an SSH bastion node. For security purposes, this is the only node that accepts external SSH traffic. All other nodes only accept SSH from the bastion.
 - `validator` module for creating a Proxy connected to a validator.
 
 
@@ -19,10 +18,6 @@ Inside the [near](./near) folder you will find a module (and submodules) to crea
 
 All nodes run on the Ubuntu LTS 18.04 AMI. Running `terraform apply` will select the latest available AMI.
 
-
-## Hardening & Security
-
-Near nodes will get provisioned with some recommended security settings from [Celo](https://www.celo.org) cLab's Security Audit team. Most of this hardening is done in `install-base.sh` and `final-hardening.sh`. 
 
 
 ## Requirements
@@ -81,14 +76,6 @@ To access the node you will first need to access the bastion as it is the only I
 
 This was Near's Stake Wars Challenge 3 and a few great tutorials in various languages can be found [here](https://github.com/nearprotocol/stakewars/blob/master/challenges/challenge003.md)  
 
-### Warchest Bot
-
-Create's a warchest of staked tokens, and dynamically maintains no more than one seat. This is designed to monitor the minimum stake to become a validator, and dynamically manage your staking pool.
-
-This was Near's Stake Wars Challenge 4 and utilizes a package built by [eorituz](https://github.com/eorituz)(A Near community member) and more information can be found [here](https://github.com/eorituz/near_warchest)
-
-*Note: Currently the user would have to ssh into the validator machine and login to NEAR ``` near login ``` for the Warchest bot to operate correctly*
-
 ### CI Integration
 
 A CI Workflow that will check the latest release of nearcore and will build from source, test and create a docker image in a docker repository you create. Props go to [masknetgoal634](https://github.com/masknetgoal634) for his implementation [here](https://github.com/masknetgoal634/nearcore-deploy). 
@@ -100,3 +87,52 @@ DOCKER_IMAGE_NAME
 DOCKER_USERNAME
 DOCKER_PASSWORD
 ```
+
+Create a `validator_key.json` 
+
+*   Generate the Key file:
+
+```
+near generate-key <pool_id>
+```
+<pool_id> ---> xx.factory.shardnet.near WHERE xx is you pool name
+
+* Copy the file generated to shardnet folder:
+Make sure to replace <pool_id> by your accountId
+
+* Edit “account_id” => xx.factory.shardnet.near, where xx is your PoolName
+* Change `private_key` to `secret_key`
+
+> Note: The account_id must match the staking pool contract name or you will not be able to sign blocks.\
+
+File content must be in the following pattern:
+```
+{
+  "account_id": "xx.factory.shardnet.near",
+  "public_key": "ed25519:HeaBJ3xLgvZacQWmEctTeUqyfSU4SDEnEwckWxd92W2G",
+  "secret_key": "ed25519:****"
+}<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+No providers.
+
+## Modules
+
+No modules.
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

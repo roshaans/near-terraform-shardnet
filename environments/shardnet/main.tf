@@ -2,8 +2,13 @@
 //                     Betanet                   |
 //------------------------------------------------
 
-provider "aws" {
-  region = var.region
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.74.0"
+    }
+  }
 }
 
 # terraform {
@@ -27,14 +32,9 @@ module "near_cluster" {
   network         = var.network
   twilio          = var.twilio
   cidr_blocks     = var.cidr_blocks
-  key_pair_name   = var.key_pair_name
   validator       = var.validator
 }
 
 output "private_ip" {
   value = module.near_cluster.private_ip
 }
-output "public_ip" {
-  value = module.near_cluster.public_ip
-}
-

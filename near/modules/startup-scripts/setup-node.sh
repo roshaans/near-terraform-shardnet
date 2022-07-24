@@ -1,10 +1,10 @@
 #! /bin/bash
-#! /bin/bash/expect
+# #! /bin/bash/expect
 
-#Set login
-set -x
-exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1
-echo BEGIN
+# #Set login
+# set -x
+# exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1
+# echo BEGIN
 
 #change $HOME to install packages as ubuntu
 export HOME=/home/ubuntu
@@ -22,6 +22,7 @@ su - ubuntu -c yes | sudo apt install build-essential nodejs
 su - ubuntu -c yes | sudo apt install npm 
 PATH="$PATH"
 
+sudo su - ubuntu
 
 #Install near-cli
 echo "export NODE_ENV=$network" >> ~/.bashrc 
@@ -41,12 +42,16 @@ pip3 install --upgrade pip
 USER_BASE_BIN=$(python3 -m site --user-base)/bin
 export PATH="$USER_BASE_BIN:$PATH"
 
-sudo apt install clang build-essential make
+sudo apt install clang build-essential make -y
 sudo apt install libcurl4-openssl-dev libssl-dev
 sudo chown -R $(whoami) /home
-sudo curl https://sh.rustup.rs -sSf | \
-    sh -s -- -y --no-modify-path --default-toolchain none
+# sudo apt install clang
+
+sudo curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path --default-toolchain none
+# rustc --version
 source "$HOME/.cargo/env"
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # source $HOME/.cargo/env
 
@@ -56,11 +61,15 @@ git config --global --add safe.directory /home/ubuntu/nearcore
 git fetch
 git checkout 8448ad1eb
 
-sudo apt install cargo
+# sudo apt install cargo -y
+# sudo chown -R $(whoami) /home
+rustup override set nightly
+rustup target add wasm32-unknown-unknown
+# sudo cargo clean
 sudo chown -R $(whoami) /home
-sudo apt install clang
-cargo build -p neard --release --features shardnet
-sudo ./target/release/neard --home ~/.near init --chain-id shardnet --download-genesis
+rustup run nightly cargo build -p neard --release --features shardnet
+# sudo cargo build --ignore-rust-version -p neard --release --features shardnet
+# sudo ./target/release/neard --home ~/.near init --chain-id shardnet --download-genesis
 
 apt-get install wget
 sudo rm ~/.near/config.json
@@ -83,7 +92,7 @@ Description=NEARd Daemon Service
 
 [Service]
 Type=simple
-User=ubuntu
+User=roo
 #Group=near
 WorkingDirectory=/home/ubuntu/.near
 ExecStart=/home/ubuntu/nearcore/target/release/neard run
@@ -95,6 +104,8 @@ KillMode=mixed
 
 [Install]
 WantedBy=multi-user.target" > "/etc/systemd/system/neard.service"
+
+echo -n '${validator_key}' > ~/.near/validator_key.json
 
 sudo systemctl enable neard
 sudo systemctl start neard
@@ -112,16 +123,15 @@ journalctl -n 100 -f -u neard | ccze -A
 # #Start nearup, stop, replace keys and start again
 # cd $HOME
 # nearup run ${network} --account-id ${stakingpool_id} 
-if [ !$intialstartup ]; then
-    pwd
-    cd $NEAR_DIRECTORY
-    rm -rf data
-    mkdir ~/.near
-    echo -n '${validator_key}' > ~/.near/validator_key.json
-    echo -n '${node_key}' > ~/.near/node_key.json
-    sudo systemctl start neard
-    journalctl -n 100 -f -u neard | ccze -A
-fi
+# if [ !$intialstartup ]; then
+#     pwd
+#     cd $NEAR_DIRECTORY
+#     rm -rf data
+#     mkdir ~/.near
+#     echo -n '${validator_key}' > ~/.near/validator_key.json
+#     sudo systemctl start neard
+#     journalctl -n 100 -f -u neard | ccze -A
+# fi
 
 
 

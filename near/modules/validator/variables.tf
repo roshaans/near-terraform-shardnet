@@ -14,10 +14,10 @@ variable "security_group_id" {
   description = "VPC Security group for this instance"
 }
 
-variable "key_pair_name" {
-  type        = string
-  description = "Name of the SSH key pair to access this node from the bastion"
-}
+# variable "key_pair_name" {
+#   type        = string
+#   description = "Name of the SSH key pair to access this node from the bastion"
+# }
 
 variable "volume_size" {
   type        = number
@@ -32,7 +32,7 @@ variable "validator" {
     gmail_address  = string
     gmail_password = string
     validator_key  = string
-    node_key       = string
+    # node_key       = string
     account_id     = string
     stakingpool_id = string
   })

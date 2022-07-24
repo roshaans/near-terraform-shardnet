@@ -9,27 +9,17 @@ module "near_vpc" {
   cidr_blocks = var.cidr_blocks
 }
 
-module "near_bastion" {
-  source = "./modules/bastion"
-
-  subnet_id         = module.near_vpc.subnet_ids.az1.public
-  security_group_id = module.near_vpc.security_group_ids.bastion
-  key_pair_name     = var.key_pair_name
-  name              = "near-bastion"
-  instance_type     = var.instance_types.bastion
-}
-
 module "near_validator" {
   source = "./modules/validator"
 
   subnet_id         = module.near_vpc.subnet_ids.az1.public
   security_group_id = module.near_vpc.security_group_ids.validator
-  key_pair_name     = var.key_pair_name
-  instance_type     = var.instance_types.validator
-  network           = var.network
-  validator         = var.validator
-  twilio            = var.twilio
-  initial_startup   = var.initial_startup
+  # key_pair_name     = var.key_pair_name
+  instance_type   = var.instance_types.validator
+  network         = var.network
+  validator       = var.validator
+  twilio          = var.twilio
+  initial_startup = var.initial_startup
 }
 
 

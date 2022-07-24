@@ -25,14 +25,14 @@ variable "instance_types" {
 
   default = {
     bastion   = "t3.micro"
-    validator = "t3.large" # t3.medium to keep costs low in dev. Use c5.xlarge or similar in production
+    validator = "t3.xlarge" # t3.medium to keep costs low in dev. Use c5.xlarge or similar in production
   }
 }
 
-variable "key_pair_name" {
-  type        = string
-  description = "AWS Key Pair name for SSH access"
-}
+# variable "key_pair_name" {
+#   type        = string
+#   description = "AWS Key Pair name for SSH access"
+# }
 
 variable "validator" {
   description = "Configuration for zero or more proxies in each availability zone."
@@ -41,7 +41,7 @@ variable "validator" {
     gmail_address  = string
     gmail_password = string
     validator_key  = string
-    node_key       = string
+    # node_key       = string
     account_id     = string
     stakingpool_id = string
   })

@@ -176,3 +176,58 @@ resource "aws_security_group_rule" "validator_allow_grafana_inbound" {
   security_group_id = aws_security_group.validator.id
   cidr_blocks       = ["0.0.0.0/0"]
 }
+
+resource "aws_flow_log" "vpc_log_flow" {
+  iam_role_arn    = aws_iam_role.cloud_watch_logger.arn
+  log_destination = aws_cloudwatch_log_group.cloud_watch_log_group.arn
+  traffic_type    = "ALL"
+  vpc_id          = aws_vpc.near.id
+}
+
+resource "aws_cloudwatch_log_group" "cloud_watch_log_group" {
+  name = "vpc_logger"
+}
+
+resource "aws_iam_role" "cloud_watch_logger" {
+  name = "cloud_watch_logger"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "vpc-flow-logs.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "cloud_watch_logger_policy" {
+  name = "cloud_watch_logger_policy"
+  role = aws_iam_role.cloud_watch_logger.id
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
